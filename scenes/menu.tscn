@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://styles/styleboxflat.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/font_title.tres" type="DynamicFont" id=2]
@@ -55,6 +55,32 @@ func _draw():
 			var tile_frame = preload(TEXTURE_TILE_FRAME)
 			draw_texture(tile_frame,Vector2(i*TILE_SIZE,j*TILE_SIZE))"
 
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Button_pressed():
+	
+	print(\"clicky\")
+	pass # replace with function body
+"
+
 [node name="Menu" type="Control" index="0"]
 
 anchor_left = 0.0
@@ -91,23 +117,7 @@ size_flags_vertical = 1
 custom_styles/panel = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Theme", "custom_styles" ]
 
-[node name="CenterContainer" type="CenterContainer" parent="Panel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Grow Direction" ]
-
-[node name="Title" type="Label" parent="Panel" index="1"]
+[node name="Title" type="Label" parent="Panel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -131,7 +141,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" index="2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -140,7 +150,7 @@ anchor_bottom = 0.0
 margin_left = 103.0
 margin_top = 125.0
 margin_right = 273.0
-margin_bottom = 260.0
+margin_bottom = 288.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 mouse_default_cursor_shape = 0
@@ -149,9 +159,6 @@ size_flags_vertical = 1
 custom_constants/separation = 5
 alignment = 0
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_constants" ]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer" index="0"]
 
@@ -176,6 +183,7 @@ group = null
 text = "Start"
 flat = false
 align = 1
+script = SubResource( 2 )
 _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="Button2" type="Button" parent="Panel/VBoxContainer" index="1"]
