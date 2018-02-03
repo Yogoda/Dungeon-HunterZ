@@ -21,11 +21,15 @@ const TEXTURE_TILE05 = \"res://tiles/floor_stone/tile_floor_stone_05.png\"
 const TEXTURE_TILE06 = \"res://tiles/floor_stone/tile_floor_stone_06.png\"
 const TEXTURE_TILE_FRAME = \"res://tiles/tile_frame.png\"
 
-
-
 func _ready():
+	set_process(true)
 	pass
 	
+func _process(delta):
+	if not round(get_viewport_rect().end.x/TILE_SIZE)+1 == i_max or not round(get_viewport_rect().end.y/TILE_SIZE)+1 == j_max:
+		update()
+		pass
+
 func _draw():
 	i_max = round(get_viewport_rect().end.x/TILE_SIZE)+1
 	j_max = round(get_viewport_rect().end.y/TILE_SIZE)+1
