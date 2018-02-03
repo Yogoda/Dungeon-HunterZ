@@ -1,11 +1,39 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://styles/styleboxflat.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/font_title.tres" type="DynamicFont" id=2]
 [ext_resource path="res://styles/button.tres" type="StyleBox" id=3]
 [ext_resource path="res://fonts/font_menu.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scripts/lobby.gd" type="Script" id=5]
+[ext_resource path="res://styles/theme.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=1]
+
+script/source = "extends Control
+
+func _ready():
+	
+	$MainMenu.show()
+	$Lobby/JoinGame.hide()
+	$Lobby/HostGame.hide()
+
+	pass
+
+func _on_HostGame_pressed():
+	
+	$MainMenu.hide()
+	$Lobby/HostGame.show()
+	
+func _on_JoinGame_pressed():
+	
+	$MainMenu.hide()
+	$Lobby/JoinGame.show()
+
+func _on_Exit_pressed():
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id=2]
 
 script/source = "extends Sprite
 
@@ -55,32 +83,6 @@ func _draw():
 			var tile_frame = preload(TEXTURE_TILE_FRAME)
 			draw_texture(tile_frame,Vector2(i*TILE_SIZE,j*TILE_SIZE))"
 
-[sub_resource type="GDScript" id=2]
-
-script/source = "extends Button
-
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-
-
-func _on_Button_pressed():
-	
-	print(\"clicky\")
-	pass # replace with function body
-"
-
 [node name="Menu" type="Control" index="0"]
 
 anchor_left = 0.0
@@ -94,12 +96,13 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = SubResource( 1 )
 
 [node name="Menu_BG" type="Sprite" parent="." index="0"]
 
-script = SubResource( 1 )
+script = SubResource( 2 )
 
-[node name="Panel" type="Panel" parent="." index="1"]
+[node name="MainMenu" type="Panel" parent="." index="1"]
 
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,7 +120,7 @@ size_flags_vertical = 1
 custom_styles/panel = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Theme", "custom_styles" ]
 
-[node name="Title" type="Label" parent="Panel" index="0"]
+[node name="Title" type="Label" parent="MainMenu" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -141,7 +144,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" index="1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -160,7 +163,7 @@ custom_constants/separation = 5
 alignment = 0
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_constants" ]
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer" index="0"]
+[node name="HostGame" type="Button" parent="MainMenu/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -180,13 +183,12 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Start"
+text = "Host Game"
 flat = false
 align = 1
-script = SubResource( 2 )
 _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer" index="1"]
+[node name="JoinGame" type="Button" parent="MainMenu/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -207,12 +209,12 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Start"
+text = "Join Game"
 flat = false
 align = 1
 _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Button3" type="Button" parent="Panel/VBoxContainer" index="2"]
+[node name="Exit" type="Button" parent="MainMenu/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -233,9 +235,306 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Start"
+text = "Exit"
 flat = false
 align = 1
 _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
+[node name="Lobby" type="Node" parent="." index="2"]
+
+script = ExtResource( 5 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="HostGame" type="Panel" parent="Lobby" index="0"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -186.0
+margin_top = -172.0
+margin_right = 203.0
+margin_bottom = 138.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panel = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Theme", "custom_styles" ]
+
+[node name="Title" type="Label" parent="Lobby/HostGame" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 15.0
+margin_top = 12.0
+margin_right = 362.0
+margin_bottom = 63.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.855603, 0.733795, 0.894531, 1 )
+custom_colors/font_color_shadow = Color( 0.268921, 0.117188, 1, 1 )
+text = "Host Game"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Label" type="Label" parent="Lobby/HostGame" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 46.0
+margin_top = 102.0
+margin_right = 209.0
+margin_bottom = 137.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 4 )
+text = "Player Name"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_fonts" ]
+
+[node name="PlayerName" type="LineEdit" parent="Lobby/HostGame" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 43.0
+margin_top = 151.0
+margin_right = 359.0
+margin_bottom = 192.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 6 )
+focus_mode = 2
+context_menu_enabled = true
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Theme" ]
+
+[node name="HostButton" type="Button" parent="Lobby/HostGame" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 119.0
+margin_top = 238.0
+margin_right = 283.0
+margin_bottom = 282.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Host"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme" ]
+
+[node name="JoinGame" type="Panel" parent="Lobby" index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -186.0
+margin_top = -172.0
+margin_right = 203.0
+margin_bottom = 220.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panel = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Theme", "custom_styles" ]
+
+[node name="Title" type="Label" parent="Lobby/JoinGame" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_top = 15.0
+margin_bottom = 66.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.855603, 0.733795, 0.894531, 1 )
+custom_colors/font_color_shadow = Color( 0.268921, 0.117188, 1, 1 )
+text = "Join Game"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Label" type="Label" parent="Lobby/JoinGame" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 37.0
+margin_top = 197.0
+margin_right = 200.0
+margin_bottom = 232.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 4 )
+text = "Player Name"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_fonts" ]
+
+[node name="Label2" type="Label" parent="Lobby/JoinGame" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 38.0
+margin_top = 97.0
+margin_right = 201.0
+margin_bottom = 132.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 4 )
+text = "Server IP"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_fonts" ]
+
+[node name="PlayerName" type="LineEdit" parent="Lobby/JoinGame" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 244.0
+margin_right = 350.0
+margin_bottom = 285.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 6 )
+focus_mode = 2
+context_menu_enabled = true
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Theme" ]
+
+[node name="IP" type="LineEdit" parent="Lobby/JoinGame" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 35.0
+margin_top = 144.0
+margin_right = 351.0
+margin_bottom = 185.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 6 )
+text = "127.0.0.1"
+focus_mode = 2
+context_menu_enabled = true
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Theme" ]
+
+[node name="JoinButton" type="Button" parent="Lobby/JoinGame" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 115.0
+margin_top = 315.0
+margin_right = 279.0
+margin_bottom = 359.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Join"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme" ]
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/HostGame" to="." method="_on_HostGame_pressed"]
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/JoinGame" to="." method="_on_JoinGame_pressed"]
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+
+[connection signal="pressed" from="Lobby/HostGame/HostButton" to="Lobby" method="_on_host_game"]
+
+[connection signal="pressed" from="Lobby/JoinGame/JoinButton" to="Lobby" method="_on_join_game"]
 
 

@@ -14,6 +14,10 @@ config/name="Dungeon-HunterZ"
 run/main_scene="res://scenes/menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
