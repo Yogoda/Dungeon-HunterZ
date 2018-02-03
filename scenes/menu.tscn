@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://styles/styleboxflat.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/font_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://fonts/font_menu.tres" type="DynamicFont" id=3]
+[ext_resource path="res://styles/button.tres" type="StyleBox" id=3]
+[ext_resource path="res://fonts/font_menu.tres" type="DynamicFont" id=4]
 
 [node name="Menu" type="Control" index="0"]
 
@@ -36,15 +37,31 @@ size_flags_vertical = 1
 custom_styles/panel = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Theme", "custom_styles" ]
 
-[node name="Title" type="Label" parent="Panel" index="0"]
+[node name="CenterContainer" type="CenterContainer" parent="Panel" index="0"]
 
-anchor_left = 0.5
+anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.5
+anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -173.5
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Grow Direction" ]
+
+[node name="Title" type="Label" parent="Panel" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 15.0
 margin_top = 12.0
-margin_right = 173.5
+margin_right = 362.0
 margin_bottom = 63.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -60,23 +77,44 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Button" type="Button" parent="Panel" index="1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" index="2"]
 
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -84.5
-margin_top = -103.0
-margin_right = 84.5
-margin_bottom = -51.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 103.0
+margin_top = 125.0
+margin_right = 273.0
+margin_bottom = 260.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 5
+alignment = 0
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_constants" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 170.0
+margin_bottom = 35.0
 rect_pivot_offset = Vector2( 0, 0 )
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -84,6 +122,58 @@ group = null
 text = "Start"
 flat = false
 align = 1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 40.0
+margin_right = 170.0
+margin_bottom = 75.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 80.0
+margin_right = 170.0
+margin_bottom = 115.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 
