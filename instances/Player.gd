@@ -60,16 +60,17 @@ func _process(delta):
 	pass
 	
 func _input(event):
-	move_input = "none"
-	#controls
-	if event.is_action("ui_left"):
-		move_input = "left"
-	if event.is_action("ui_right"):
-		move_input = "right"
-	if event.is_action("ui_up"):
-		move_input = "top"
-	if event.is_action("ui_down"):
-		move_input = "down"
+	if GameManager.characters.has(player_num):
+		move_input = "none"
+		#controls
+		if event.is_action("ui_left"):
+			move_input = "left"
+		if event.is_action("ui_right"):
+			move_input = "right"
+		if event.is_action("ui_up"):
+			move_input = "top"
+		if event.is_action("ui_down"):
+			move_input = "down"
 		
 
 func _position_ini():
@@ -79,13 +80,13 @@ func _position_ini():
 	
 func _hero_ini():
 	var hero_sprite = "res://sprites/heroes/hero01.png"
-	if player_num == 0:
-		hero_sprite = "res://sprites/heroes/hero01.png"
 	if player_num == 1:
-		hero_sprite = "res://sprites/heroes/hero02.png"
+		hero_sprite = "res://sprites/heroes/hero01.png"
 	if player_num == 2:
-		hero_sprite = "res://sprites/heroes/hero03.png"
+		hero_sprite = "res://sprites/heroes/hero02.png"
 	if player_num == 3:
+		hero_sprite = "res://sprites/heroes/hero03.png"
+	if player_num == 4:
 		hero_sprite = "res://sprites/heroes/hero04.png"
 		
 	$Player_Sprite.texture = load(hero_sprite)

@@ -22,7 +22,7 @@ func _ready():
 		add_child(player_instance)
 		player_instance.i_pos_new = 0
 		player_instance.j_pos_new = round(Map.tile_j_max/2) - 2 + i
-		player_instance.player_num = i
+		player_instance.player_num = i+1
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
