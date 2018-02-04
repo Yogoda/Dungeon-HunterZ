@@ -58,7 +58,20 @@ func _process(delta):
 		#fill the slot
 		Map.array_map_obst[i_pos][j_pos] = 1
 		_position_ini()
+		rpc("_player_pos_update",i_pos,j_pos,i_pos_new,j_pos_new)
+		
+		pass
+	
+remote func _player_pos_update(i_pos,j_pos,i_pos_new, j_pos_new):
+	#free the slot
+	Map.array_map_obst[i_pos][j_pos] = 0
+	i_pos = i_pos_new
+	j_pos = j_pos_new
+	#fill the slot
+	Map.array_map_obst[i_pos][j_pos] = 1
+	_position_ini()
 	pass
+	
 	
 func _input(event):
 	
@@ -78,7 +91,7 @@ func _position_ini():
 	position.x = i_pos * Map.tile_size+Map.dungeon_left_margin + Map.tile_size/2
 	position.y = j_pos * Map.tile_size+Map.dungeon_top_margin + Map.tile_size/6
 	
-	rpc("set_pos", position.x, position.y)
+	#rpc("set_pos", position.x, position.y)
 	
 remote func set_pos(x, y):
 	position.x = x
