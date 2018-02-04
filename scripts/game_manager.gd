@@ -18,7 +18,7 @@ const DEFAULT_PORT = 10567
 const MAX_PEERS = 1
 
 # Name for my player
-var player_name
+var player_name = "Bulbi"
 
 # Names for remote players in id:name format
 var players = {}
