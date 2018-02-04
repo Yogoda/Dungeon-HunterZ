@@ -17,6 +17,7 @@ func _ready():
 	pass
 
 func _process(delta):
+	
 	move_delay -= delta
 	if move_delay < 0:
 		player_control = true
@@ -60,6 +61,7 @@ func _process(delta):
 	pass
 	
 func _input(event):
+	
 	if GameManager.characters.has(player_num):
 		move_input = "none"
 		#controls
@@ -71,12 +73,16 @@ func _input(event):
 			move_input = "top"
 		if event.is_action("ui_down"):
 			move_input = "down"
-		
 
 func _position_ini():
 	position.x = i_pos * Map.tile_size+Map.dungeon_left_margin + Map.tile_size/2
 	position.y = j_pos * Map.tile_size+Map.dungeon_top_margin + Map.tile_size/6
-	pass
+	
+	rpc("set_pos", position.x, position.y)
+	
+remote func set_pos(x, y):
+	position.x = x
+	position.y = y
 	
 func _hero_ini():
 	var hero_sprite = "res://sprites/heroes/hero01.png"

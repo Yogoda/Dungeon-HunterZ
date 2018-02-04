@@ -19,11 +19,11 @@ var characters = []
 
 func add_character(id):
 	characters.append(id)
-#	show_characters()
+	show_characters()
 	
 func remove_character(id):
 	characters.erase(id)
-#	show_characters()
+	show_characters()
 	
 func show_characters():
 	for c in characters:
@@ -49,9 +49,12 @@ func join_game(ip, new_player_name):
 	peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
 	
-func change_scene(scene):
+func start_game():
+	
+	rpc("change_scene", "res://scenes/dungeon.tscn")
+	
+sync func change_scene(scene):
 	
 #		for node in get_tree().get_root().get_children():
 #			node.queue_free()
-
 		get_tree().change_scene(scene)
