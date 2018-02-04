@@ -11,17 +11,37 @@ var array_map_obst = []
 var dungeon_left_margin = 100
 var dungeon_top_margin = 50
 
+#############################
+#############################
+
 # Default game port
 const DEFAULT_PORT = 10567
 
 # Max number of players
 const MAX_PEERS = 1
 
+const PEER_ME = 0
+const PEER_YOU = 1
+
 # Name for my player
 var player_name = "Bulbi"
 
 # Names for remote players in id:name format
 var players = {}
+
+var characters = []
+
+func add_character(id):
+	characters.append(id)
+	show_characters()
+	
+func remove_character(id):
+	characters.erase(id)
+	show_characters()
+	
+func show_characters():
+	for c in characters:
+		print("character:" + str(c))
 
 func _ready():
 	#initialize map
