@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameManager="*res://scripts/game_manager.gd"
+Map="*res://scripts/map.gd"
 
 [input]
 

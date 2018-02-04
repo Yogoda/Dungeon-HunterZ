@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://styles/styleboxflat.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/font_title.tres" type="DynamicFont" id=2]
@@ -96,9 +96,9 @@ var nb_selected_characters = 0
 func _on_visibility_changed():
 	
 	if get_tree().is_network_server():
-		$ReadyButton.show()
+		$StartButton.show()
 	else:
-		$ReadyButton.hide()
+		$StartButton.hide()
 
 #add MY selected characters to the list
 func _on_charater_selected(peer, id, selected):
@@ -118,11 +118,23 @@ func _on_charater_selected(peer, id, selected):
 			GameManager.remove_character(id)
 			
 	if nb_selected_characters < 4:
-		$ReadyButton.disabled = true
+		$StartButton.disabled = true
 	else:
-		$ReadyButton.disabled = false
+		$StartButton.disabled = false
 		
 #	print(\"selected characters %s\" % nb_selected_characters)"
+
+[sub_resource type="GDScript" id=7]
+
+script/source = "extends Button
+
+func _ready():
+	pass
+	
+func _on_StartButton_pressed():
+	
+	GameManager.change_scene(\"res://scenes/dungeon.tscn\")
+"
 
 [sub_resource type="StyleBoxTexture" id=3]
 
@@ -181,7 +193,7 @@ expand_margin_bottom = 0.0
 modulate_color = Color( 1, 1, 1, 1 )
 draw_center = true
 
-[node name="Menu" type="Control" index="0"]
+[node name="Menu" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -668,7 +680,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="ReadyButton" type="Button" parent="Lobby/CharactersSelect" index="1"]
+[node name="StartButton" type="Button" parent="Lobby/CharactersSelect" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -692,6 +704,7 @@ group = null
 text = "Start"
 flat = false
 align = 1
+script = SubResource( 7 )
 _sections_unfolded = [ "Theme" ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Lobby/CharactersSelect" index="2"]
@@ -768,6 +781,8 @@ custom_styles/panel = SubResource( 5 )
 [connection signal="pressed" from="Lobby/JoinGame/JoinButton" to="Lobby" method="_on_join_game"]
 
 [connection signal="visibility_changed" from="Lobby/CharactersSelect" to="Lobby/CharactersSelect" method="_on_visibility_changed"]
+
+[connection signal="pressed" from="Lobby/CharactersSelect/StartButton" to="Lobby/CharactersSelect/StartButton" method="_on_StartButton_pressed"]
 
 [connection signal="charater_selected" from="Lobby/CharactersSelect/HBoxContainer/CharacterPick" to="Lobby/CharactersSelect" method="_on_charater_selected"]
 

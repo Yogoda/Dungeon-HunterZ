@@ -17,8 +17,8 @@ const TEXTURE_TILE06 = \"res://tiles/floor_stone/tile_floor_stone_06.png\"
 const TEXTURE_TILE_FRAME = \"res://tiles/tile_frame.png\"
 
 func _ready():
-	i_max = GameManager.tile_i_max
-	j_max = GameManager.tile_j_max
+	i_max = Map.tile_i_max
+	j_max = Map.tile_j_max
 	
 func _process(delta):
 	pass
@@ -29,7 +29,7 @@ func _draw():
 			var k = 0
 			#Draw tile base
 			var tile_text = preload(TEXTURE_TILE01)
-			if GameManager.array_map_tile[i][j] == \"floor_stone\":
+			if Map.array_map_tile[i][j] == \"floor_stone\":
 				k = randi()%6 + 1
 				if k == 2:
 					tile_text = preload(TEXTURE_TILE02)
@@ -41,11 +41,11 @@ func _draw():
 					tile_text = preload(TEXTURE_TILE05)
 				if k == 6:
 					tile_text = preload(TEXTURE_TILE06)
-			draw_texture(tile_text,Vector2(i*GameManager.tile_size+GameManager.dungeon_left_margin,j*GameManager.tile_size+GameManager.dungeon_top_margin))
+			draw_texture(tile_text,Vector2(i*Map.tile_size+Map.dungeon_left_margin,j*Map.tile_size+Map.dungeon_top_margin))
 			
 			#Draw tile frame
 			var tile_frame = preload(TEXTURE_TILE_FRAME)
-			draw_texture(tile_frame,Vector2(i*GameManager.tile_size+GameManager.dungeon_left_margin,j*GameManager.tile_size+GameManager.dungeon_top_margin))"
+			draw_texture(tile_frame,Vector2(i*Map.tile_size+Map.dungeon_left_margin,j*Map.tile_size+Map.dungeon_top_margin))"
 
 [node name="Map_sprite" type="Sprite"]
 

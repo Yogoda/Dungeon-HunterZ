@@ -30,19 +30,19 @@ func _process(delta):
 		if player_control == true:
 			if move_input == "left":
 				if i_pos > 0:
-					if GameManager.array_map_obst[i_pos-1][j_pos] == 0:
+					if Map.array_map_obst[i_pos-1][j_pos] == 0:
 						i_pos_new = i_pos-1
 			if move_input == "right":
-				if i_pos < GameManager.tile_i_max-1:
-					if GameManager.array_map_obst[i_pos+1][j_pos] == 0:
+				if i_pos < Map.tile_i_max-1:
+					if Map.array_map_obst[i_pos+1][j_pos] == 0:
 						i_pos_new = i_pos+1
 			if move_input == "top":
 				if j_pos > 0:
-					if GameManager.array_map_obst[i_pos][j_pos-1] == 0:
+					if Map.array_map_obst[i_pos][j_pos-1] == 0:
 						j_pos_new = j_pos -1
 			if move_input == "down":
-				if j_pos < GameManager.tile_j_max-1:
-					if GameManager.array_map_obst[i_pos][j_pos+1] == 0:
+				if j_pos < Map.tile_j_max-1:
+					if Map.array_map_obst[i_pos][j_pos+1] == 0:
 						j_pos_new = j_pos+1
 			if not i_pos == i_pos_new or not j_pos == j_pos_new:
 				player_control = false
@@ -51,11 +51,11 @@ func _process(delta):
 	
 	if not i_pos_new == i_pos or not j_pos_new == j_pos:
 		#free the slot
-		GameManager.array_map_obst[i_pos][j_pos] = 0
+		Map.array_map_obst[i_pos][j_pos] = 0
 		i_pos = i_pos_new
 		j_pos = j_pos_new
 		#fill the slot
-		GameManager.array_map_obst[i_pos][j_pos] = 1
+		Map.array_map_obst[i_pos][j_pos] = 1
 		_position_ini()
 	pass
 	
@@ -73,8 +73,8 @@ func _input(event):
 		
 
 func _position_ini():
-	position.x = i_pos * GameManager.tile_size+GameManager.dungeon_left_margin + GameManager.tile_size/2
-	position.y = j_pos * GameManager.tile_size+GameManager.dungeon_top_margin + GameManager.tile_size/6
+	position.x = i_pos * Map.tile_size+Map.dungeon_left_margin + Map.tile_size/2
+	position.y = j_pos * Map.tile_size+Map.dungeon_top_margin + Map.tile_size/6
 	pass
 	
 func _hero_ini():
