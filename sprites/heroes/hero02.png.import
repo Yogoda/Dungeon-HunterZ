@@ -7,10 +7,10 @@ path="res://.import/hero02.png-97ab3a173633cddff3288e61bc6c3b80.stex"
 [deps]
 
 source_file="res://sprites/heroes/hero02.png"
-source_md5="0de1dccc75b445688f69343d280a12b8"
+source_md5="b523557003a7a6834fd6eef3254f1cd4"
 
 dest_files=[ "res://.import/hero02.png-97ab3a173633cddff3288e61bc6c3b80.stex" ]
-dest_md5="6e47cb6f70b4a166a30e5087bab1bf6c"
+dest_md5="ce72c617133ec444906b248498708159"
 
 [params]
 

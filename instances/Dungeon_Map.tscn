@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+var i = 0
+var j = 0
+var i_max = 0
+var j_max = 0
+const TEXTURE_TILE01 = \"res://tiles/floor_stone/tile_floor_stone_01.png\"
+const TEXTURE_TILE02 = \"res://tiles/floor_stone/tile_floor_stone_02.png\"
+const TEXTURE_TILE03 = \"res://tiles/floor_stone/tile_floor_stone_03.png\"
+const TEXTURE_TILE04 = \"res://tiles/floor_stone/tile_floor_stone_04.png\"
+const TEXTURE_TILE05 = \"res://tiles/floor_stone/tile_floor_stone_05.png\"
+const TEXTURE_TILE06 = \"res://tiles/floor_stone/tile_floor_stone_06.png\"
+const TEXTURE_TILE_FRAME = \"res://tiles/tile_frame.png\"
+
+func _ready():
+	i_max = GameManager.tile_i_max
+	j_max = GameManager.tile_j_max
+	
+func _process(delta):
+	pass
+
+func _draw():
+	for i in range(i_max): 
+		for j in range(j_max):
+			var k = 0
+			#Draw tile base
+			var tile_text = preload(TEXTURE_TILE01)
+			if GameManager.array_map_tile[i][j] == \"floor_stone\":
+				k = randi()%6 + 1
+				if k == 2:
+					tile_text = preload(TEXTURE_TILE02)
+				if k == 3:
+					tile_text = preload(TEXTURE_TILE03)
+				if k == 4:
+					tile_text = preload(TEXTURE_TILE04)
+				if k == 5:
+					tile_text = preload(TEXTURE_TILE05)
+				if k == 6:
+					tile_text = preload(TEXTURE_TILE06)
+			draw_texture(tile_text,Vector2(i*GameManager.tile_size+GameManager.dungeon_left_margin,j*GameManager.tile_size+GameManager.dungeon_top_margin))
+			
+			#Draw tile frame
+			var tile_frame = preload(TEXTURE_TILE_FRAME)
+			draw_texture(tile_frame,Vector2(i*GameManager.tile_size+GameManager.dungeon_left_margin,j*GameManager.tile_size+GameManager.dungeon_top_margin))"
+
+[node name="Map_sprite" type="Sprite"]
+
+script = SubResource( 1 )
+
+

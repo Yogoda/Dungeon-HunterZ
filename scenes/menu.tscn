@@ -12,7 +12,6 @@
 script/source = "extends Control
 
 func _ready():
-	
 	$MainMenu.show()
 	$Lobby/JoinGame.hide()
 	$Lobby/HostGame.hide()
@@ -83,7 +82,7 @@ func _draw():
 			var tile_frame = preload(TEXTURE_TILE_FRAME)
 			draw_texture(tile_frame,Vector2(i*TILE_SIZE,j*TILE_SIZE))"
 
-[node name="Menu" type="Control" index="0"]
+[node name="Menu" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
