@@ -52,26 +52,25 @@ func _process(delta):
 	
 	if not i_pos_new == i_pos or not j_pos_new == j_pos:
 		#free the slot
-		Map.array_map_obst[i_pos][j_pos] = 0
-		i_pos = i_pos_new
-		j_pos = j_pos_new
-		#fill the slot
-		Map.array_map_obst[i_pos][j_pos] = 1
-		_position_ini()
-		rpc("_player_pos_update",i_pos,j_pos,i_pos_new,j_pos_new)
-		
-		pass
+#		Map.array_map_obst[i_pos][j_pos] = 0
+#		i_pos = i_pos_new
+#		j_pos = j_pos_new
+#		#fill the slot
+#		Map.array_map_obst[i_pos][j_pos] = 1
+#		_position_ini()
+		rpc("_player_pos_update",i_pos_new,j_pos_new)
 	
-remote func _player_pos_update(i_pos,j_pos,i_pos_new, j_pos_new):
+sync func _player_pos_update(pi_i_pos_new, pi_j_pos_new):
 	#free the slot
 	Map.array_map_obst[i_pos][j_pos] = 0
-	i_pos = i_pos_new
-	j_pos = j_pos_new
+	i_pos = pi_i_pos_new
+	j_pos = pi_j_pos_new
+	
+	i_pos_new = i_pos
+	j_pos_new = j_pos
 	#fill the slot
 	Map.array_map_obst[i_pos][j_pos] = 1
 	_position_ini()
-	pass
-	
 	
 func _input(event):
 	
